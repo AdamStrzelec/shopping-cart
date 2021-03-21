@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Button from '../../Button/Button';
 
 const Wrapper = styled.div`
     overflow: hidden;
@@ -26,9 +27,9 @@ const ProductItem = ({ name, image, price, slug, categories}) => (
                 )}
             </div>
         </div>
-        <div>
+        <div className="mb-5 sm:mb-0 mt-5 sm:mt-0 sm:pr-5">
             <p>{price} zł</p>
-            <StyledButton className="sm:mr-3 mt-3 mb-4 sm:mb-0">Dodaj do koszyka</StyledButton> 
+            <Button>Dodaj do koszyka</Button> 
         </div>
        
     </Wrapper>

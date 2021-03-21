@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
+import Button from '../components/Button/Button';
 
 const Product = ({ match }) => {
 
@@ -39,8 +40,8 @@ const Product = ({ match }) => {
                             <p key={category.name}>{category.name}</p>    
                         )}
                     </div>
-                    <p>Cena: <span className="font-bold">{data.products[0].price} zł</span></p>
-                    <button>Dodaj do koszyka</button>
+                    <p className="mb-5">Cena: <span className="font-bold">{data.products[0].price} zł</span></p>
+                    <Button>Dodaj do koszyka</Button>
                 </div>
             </div>
             }
