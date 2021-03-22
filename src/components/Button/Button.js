@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const StyledButton = styled.button`
+    width: 135px;
     background-color: ${props => props.isSecondary ? '#F1948A' : '#58D68D'};
     padding: 3px;
     border-radius: 5px;

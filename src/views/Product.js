@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { useQuery, gql } from '@apollo/client';
 import Button from '../components/Button/Button';
+import { isProductInCart } from '../utils/isProductInCart';
+import { 
+    addProductToCart as addProductToCartAction,
+    removeProductFromCart as removeProductFromCartAction } from '../actions/actions';
 
-const Product = ({ match }) => {
+const Product = ({ match, addProductToCart, removeProductFromCart, productsInCart }) => {
 
     useEffect(()=>{
         
@@ -23,6 +28,14 @@ const Product = ({ match }) => {
         }
     `);    
 
+    const handleShoppingCart = (product) => {
+        if(isProductInCart(product.slug, productsInCart)){
+            removeProductFromCart(product.slug);
+        }else{
+            addProductToCart(product)
+        }  
+    }
+
     return(
         <>
             {(loading || error) ? 
@@ -41,7 +54,9 @@ const Product = ({ match }) => {
                         )}
                     </div>
                     <p className="mb-5">Cena: <span className="font-bold">{data.products[0].price} zł</span></p>
-                    <Button>Dodaj do koszyka</Button>
+                    <Button isSecondary={isProductInCart(data.products[0].slug, productsInCart)} onClick={()=>handleShoppingCart(data.products[0])}>
+                        {isProductInCart(data.products[0].slug, productsInCart) ? 'Usuń z koszyka' : 'Dodaj do koszyka'}
+                    </Button>
                 </div>
             </div>
             }
@@ -49,4 +64,12 @@ const Product = ({ match }) => {
     )
 }
 
-export default withRouter(Product);
+const mapStateToProps = ({ productsInCart }) => ({
+    productsInCart
+})
+const mapDispatchToProps = (dispatch) => ({
+    addProductToCart: (product) => dispatch(addProductToCartAction(product)),
+    removeProductFromCart: (slug) => dispatch(removeProductFromCartAction(slug))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Product));

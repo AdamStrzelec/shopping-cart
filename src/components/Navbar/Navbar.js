@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
@@ -14,7 +14,6 @@ const Wrapper = styled.div`
     padding: 0 30px;
     color: #E5E8E8;
     display: flex;
-    justify-content: space-between;
     align-items: center;
 `
 const StyledButton = styled.button`
@@ -23,32 +22,17 @@ const StyledButton = styled.button`
     cursor: pointer;
     position: relative;
 `
-const Counter = styled.span`
-    padding: 10px;
-    margin: 0;
-    position: absolute;
-    right: -10px;
-    bottom: 0;
-    background-color: #EC7063;
-    padding: 3px;
-    border-radius: 10px;
-    font-size: 10px;
-    font-weight: bold;
-`
 
-const Navbar = () => (
-    <Wrapper>
-        <StyledButton>
-            <Link to={'/'}>
-                <FontAwesomeIcon icon={faHome}  size={'2x'}/>
-            </Link>
-        </StyledButton>
-        
-        <StyledButton>
-            <FontAwesomeIcon icon={faShoppingCart}  size={'2x'}/>
-            <Counter>{0}</Counter>
-        </StyledButton>
-    </Wrapper>
-)
+const Navbar = () => {
+    return(
+        <Wrapper>
+            <StyledButton>
+                <Link to={'/'}>
+                    <FontAwesomeIcon icon={faHome}  size={'2x'}/>
+                </Link>
+            </StyledButton>
+        </Wrapper>
+    )
+}
 
 export default Navbar;

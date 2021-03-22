@@ -22,7 +22,7 @@ const ProductsContainer = () => {
 
     return(
         <>
-            {loading ? 
+            {loading || error ? 
             <p className="text-center">Pobieranie danych...</p>
             :
             data.products.filter(product => product.name.toLowerCase().includes(searchValue.toLowerCase())).map(product => 
