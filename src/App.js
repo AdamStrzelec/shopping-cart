@@ -3,18 +3,14 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './config/Apollo';
 import Home from './views/Home';
 import Product from './views/Product';
 import Navbar from './components/Navbar/Navbar';
 import ShoppingCartContainer from './components/ShoppingCartContainer/ShoppingCartContainer';
 import { Provider } from 'react-redux';
 import store from './store/store';
-
-const client = new ApolloClient({
-  uri: process.env.REACT_APP_GRAPHQL_URI,
-  cache: new InMemoryCache()
-});
 
 function App() {
   return (

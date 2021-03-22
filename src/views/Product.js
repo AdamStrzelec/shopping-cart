@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { GET_SINGLE_PRODUCT } from '../graphql/query';
 import Button from '../components/Button/Button';
 import { isProductInCart } from '../utils/isProductInCart';
 import { 
@@ -10,23 +11,7 @@ import {
 
 const Product = ({ match, addProductToCart, removeProductFromCart, productsInCart }) => {
 
-    useEffect(()=>{
-        
-    })
-    const { loading, error, data } = useQuery(gql`
-        query getProduct{
-                products(slug: "${match.params.slug}"){
-                id,
-                name,
-                slug,
-                image,
-                price,
-                categories{
-                    name
-                }
-            }
-        }
-    `);    
+    const { loading, error, data } = useQuery(GET_SINGLE_PRODUCT, {variables: { slug: match.params.slug } });     
 
     const handleShoppingCart = (product) => {
         if(isProductInCart(product.slug, productsInCart)){

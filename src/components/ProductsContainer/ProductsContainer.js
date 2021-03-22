@@ -1,31 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ProductItem from './ProductItem/ProductItem';
-import { useQuery, gql } from '@apollo/client';
-import { SearchContext } from '../../views/Home';
+import { useQuery } from '@apollo/client';
+import { GET_ALL_PRODUCTS } from '../../graphql/query';
+import { filterProductsByName } from '../../utils/filterProductsByName';
+import { connect } from 'react-redux';
 
-const ProductsContainer = () => {
-    const { loading, error, data } = useQuery(gql`
-    query getProducts{
-        products{
-        id,
-        name,
-        slug,
-        image,
-        price,
-        categories{
-            name
-        }
-        }
-    }
-    `);
-    const { searchValue } = useContext(SearchContext);
+const ProductsContainer = ({ searchValue, productsInCart }) => {
+    const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
 
     return(
         <>
             {loading || error ? 
             <p className="text-center">Pobieranie danych...</p>
             :
-            data.products.filter(product => product.name.toLowerCase().includes(searchValue.toLowerCase())).map(product => 
+            filterProductsByName(data.products, searchValue).map(product => 
                 <ProductItem 
                     key={product.slug}
                     id={product.id}
@@ -34,6 +23,7 @@ const ProductsContainer = () => {
                     price={product.price}
                     slug={product.slug}
                     categories={product.categories}
+                    productsInCart={productsInCart}
                 />
             )
             }
@@ -41,4 +31,12 @@ const ProductsContainer = () => {
     )
 }
 
-export default ProductsContainer;
+ProductsContainer.propTypes = {
+    searchValue: PropTypes.string,
+}
+
+const mapStateToProps = ({ productsInCart }) => ({
+    productsInCart
+})
+
+export default connect(mapStateToProps)(ProductsContainer);

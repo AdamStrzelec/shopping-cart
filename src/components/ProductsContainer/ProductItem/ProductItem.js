@@ -60,12 +60,9 @@ ProductItem.propTypes = {
     }))
 }
 
-const mapStateToProps = ({ productsInCart }) => ({
-    productsInCart
-})
 const mapDispatchToProps = (dispatch) => ({
     addProductToCart: (product) => dispatch(addProductToCartAction(product)),
     removeProductFromCart: (slug) => dispatch(removeProductFromCartAction(slug))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductItem);
+export default connect(null, mapDispatchToProps)(ProductItem);

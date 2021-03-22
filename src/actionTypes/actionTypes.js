@@ -1,0 +1,5 @@
+export const GET_PRODUCTS_FROM_MEMORY = 'GET_PRODUCTS_FROM_MEMORY';
+
+export const ADD_TO_CART = 'ADD_TO_CART';
+
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';

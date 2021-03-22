@@ -16,7 +16,7 @@ const Wrapper = styled.div`
     transform: ${props => props.isCartOpen ? 'translateX(0)' : 'translateX(100%)'};
     transition: transform 0.3s ease-in-out;
 `
-const StyledButton = styled.button`
+const ShoppingCartButton = styled.button`
     border: none;
     outline: none;
     cursor: pointer;
@@ -48,10 +48,10 @@ const ShoppingCartContainer = ({ getProductsInCartFromMemory, productsInCart }) 
 
     return(
         <>
-            <StyledButton onClick={()=>setCartOpen(true)}>
+            <ShoppingCartButton onClick={()=>setCartOpen(true)}>
                 <FontAwesomeIcon icon={faShoppingCart}  size={'2x'}/>
                 <Counter>{productsInCart.length}</Counter>
-            </StyledButton>
+            </ShoppingCartButton>
             <Wrapper isCartOpen={isCartOpen}>
                 <button className="ml-3 mt-2" onClick={()=>setCartOpen(false)}>
                     <FontAwesomeIcon icon={faWindowClose} size={'2x'} />
