@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getProductsInCartFromMemory as getProductsInCartFromMemoryAction } from '../../actions/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { getProductsInCartTotalPrice } from '../../utils/getProductsInCartTotalPrice';
 import ShoppingCartItem from './ShoppingCartItem/ShoppingCartItem';
 
 const Wrapper = styled.div`
@@ -74,9 +75,7 @@ const ShoppingCartContainer = ({ getProductsInCartFromMemory, productsInCart }) 
                 </div>
 
                 <p className="text-center mt-5">
-                    Łączna kwota: <span className="font-bold">{productsInCart.reduce((acc, product) => {
-                        return acc + parseInt(product.price)
-                    }, 0)} zł</span>
+                    Łączna kwota: <span className="font-bold">{getProductsInCartTotalPrice(productsInCart)} zł</span>
                 </p>
             </Wrapper>
         </>
